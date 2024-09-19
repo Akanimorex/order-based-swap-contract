@@ -17,7 +17,8 @@ contract TokenSwap {
         bool isActive;
     }
 
-    Order[] public orders;
+    mapping(uint256 => Order) public orders;
+    uint256 public orderCount;
 
     event OrderCreated(uint256 orderId, address indexed depositor, address tokenOffered, uint256 amountOffered, address tokenRequested, uint256 amountRequested);
     event OrderFilled(uint256 orderId, address indexed buyer);
@@ -37,11 +38,12 @@ contract TokenSwap {
         newOrder.amountRequested = _amountRequested;
         newOrder.isActive = true;
 
-        orders.push(newOrder);
+        orders[orderCount] = newOrder;
+        orderCount++;
 
       
 
-        emit OrderCreated(orders.length - 1, msg.sender, _tokenOffered, _amountOffered, _tokenRequested, _amountRequested);
+        emit OrderCreated(orderCount - 1, msg.sender, _tokenOffered, _amountOffered, _tokenRequested, _amountRequested);
     }
 
     function fillOrder(uint256 _orderId) external {

@@ -25,8 +25,7 @@ describe("StakeEth", function () {
       expect(await  stakeEth.owner()).to.equal(await owner.getAddress());
       
       // expect( await stakeEth.).to.above(0);
-      expect( await stakeEth.owner.);
-
+      
     });
 
 
