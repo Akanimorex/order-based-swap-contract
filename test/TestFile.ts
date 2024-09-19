@@ -11,8 +11,8 @@ describe("TokenSwap", function () {
     //deploy two tokens
     const AKAN = await ethers.getContractFactory("AKAN");
     const GUZ = await ethers.getContractFactory("GUZ");
-    const akan = await AKAN.deploy();
-    const guz = await GUZ.deploy();
+    const akanToken = await AKAN.deploy();
+    const guzToken   = await GUZ.deploy();
 
     const [owner, otherAccount] = await hre.ethers.getSigners();
 
@@ -20,18 +20,17 @@ describe("TokenSwap", function () {
 
     const amount = ethers.parseUnits("100", 18);
 
-    await guz.transfer(tokenSwap.getAddress(), amount);
-    await akan.transfer(tokenSwap.getAddress(), amount);
+    await guzToken.transfer(tokenSwap.getAddress(), amount);
+    await akanToken.transfer(tokenSwap.getAddress(), amount);
 
-    return {  owner,tokenSwap,akan,guz,otherAccount };
+    return {  owner,tokenSwap,akanToken,guzToken,otherAccount };
   }
 
   describe("Deployment", function () {
-    it("", async function () {
-      // const { stakeEth, owner} = await loadFixture(deployContractAndSetVariables);
+    it("should deploy contract", async function () {
+      const {  owner,tokenSwap,akanToken,guzToken,otherAccount} = await loadFixture(deployContractAndSetVariables);
       // expect(await  stakeEth.owner()).to.equal(await owner.getAddress());
-      
-      
+      expect(await tokenSwap.getAddress()).to.properAddress;
     });
 
 
