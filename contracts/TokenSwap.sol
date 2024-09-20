@@ -51,7 +51,7 @@ contract TokenSwap {
         require(order.isActive, "Order is not active");
 
         IERC20(order.tokenRequested).transferFrom(msg.sender, order.depositor, order.amountRequested);
-        IERC20(order.tokenOffered).transfer(msg.sender, order.amountOffered);
+        // IERC20(order.tokenOffered).transfer(msg.sender, order.amountOffered);
 
         order.isActive = false;
 
